@@ -1,0 +1,35 @@
+<section class="course-detail">
+
+  @if (course) {
+
+    <h2>{{ course.name }}</h2>
+
+    <p>
+      <strong>Course ID:</strong>
+      {{ course.id }}
+    </p>
+
+    <p>
+      <strong>Course code:</strong>
+      {{ course.code }}
+    </p>
+
+    <p>
+      <strong>Credits:</strong>
+      {{ course.credits }}
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      {{ course.gradeStatus }}
+    </p>
+
+  } @else {
+
+    <h2>Course not found</h2>
+
+  }
+
+  <a routerLink="/courses">Back to Courses</a>
+
+</section>

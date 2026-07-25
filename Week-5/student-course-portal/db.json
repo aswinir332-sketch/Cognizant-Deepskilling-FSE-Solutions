@@ -1,0 +1,41 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Angular Fundamentals",
+      "code": "CS301",
+      "credits": 4,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": 2,
+      "name": "Java Programming",
+      "code": "CS302",
+      "credits": 4,
+      "gradeStatus": "failed"
+    },
+    {
+      "id": 3,
+      "name": "Database Management Systems",
+      "code": "CS303",
+      "credits": 3,
+      "gradeStatus": "pending"
+    },
+    {
+      "id": 4,
+      "name": "Web Development",
+      "code": "CS304",
+      "credits": 4,
+      "gradeStatus": "passed"
+    },
+    {
+      "id": 5,
+      "name": "Cloud Computing",
+      "code": "CS305",
+      "credits": 3,
+      "gradeStatus": "pending"
+    }
+  ],
+  "students": [],
+  "enrollments": []
+}

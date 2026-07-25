@@ -1,0 +1,42 @@
+<section class="course-list-container">
+
+  <h2>Available Courses</h2>
+
+  <p
+    class="loading-message"
+    *ngIf="loading$ | async"
+  >
+    Loading courses...
+  </p>
+
+  <p
+    class="error-message"
+    *ngIf="error$ | async as error"
+  >
+    {{ error }}
+  </p>
+
+  <div
+    class="course-grid"
+    *ngIf="!(loading$ | async)"
+  >
+    <app-course-card
+      *ngFor="let course of courses$ | async"
+      [course]="course"
+      [isEnrolled]="isCourseEnrolled(course.id)"
+      (enrollRequested)="onEnrollRequested($event)"
+    >
+    </app-course-card>
+  </div>
+
+  <p
+    class="empty-message"
+    *ngIf="
+      !(loading$ | async) &&
+      (courses$ | async)?.length === 0
+    "
+  >
+    No courses available.
+  </p>
+
+</section>

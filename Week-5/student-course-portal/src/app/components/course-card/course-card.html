@@ -1,0 +1,25 @@
+<div class="course-card">
+
+  <h3>{{ course.name }}</h3>
+
+  <p class="course-code">
+    Course Code: {{ course.code }}
+  </p>
+
+  <p>
+    Credits: {{ course.credits }}
+  </p>
+
+  <p>
+    Status: {{ course.gradeStatus }}
+  </p>
+
+  <button
+    type="button"
+    class="enroll-button"
+    (click)="requestEnrollment()"
+  >
+    {{ isEnrolled ? 'Unenroll' : 'Enroll' }}
+  </button>
+
+</div>

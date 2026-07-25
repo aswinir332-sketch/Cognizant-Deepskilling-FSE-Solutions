@@ -1,0 +1,225 @@
+<h2>Reactive Enrollment Form</h2>
+
+<form
+  [formGroup]="enrollForm"
+  (ngSubmit)="onSubmit()"
+>
+
+  <div>
+    <label for="studentName">Student Name</label>
+
+    <input
+      id="studentName"
+      type="text"
+      formControlName="studentName"
+      placeholder="Enter student name"
+    >
+
+    @if (
+      enrollForm.get('studentName')?.touched &&
+      enrollForm.get('studentName')?.hasError('required')
+    ) {
+      <small>Student name is required.</small>
+    }
+
+    @if (
+      enrollForm.get('studentName')?.touched &&
+      enrollForm.get('studentName')?.hasError('minlength')
+    ) {
+      <small>Name must contain at least 3 characters.</small>
+    }
+  </div>
+
+  <div>
+    <label for="studentEmail">Student Email</label>
+
+    <input
+      id="studentEmail"
+      type="email"
+      formControlName="studentEmail"
+      placeholder="Enter student email"
+    >
+
+    @if (
+      enrollForm.get('studentEmail')?.touched &&
+      enrollForm.get('studentEmail')?.hasError('required')
+    ) {
+      <small>Email is required.</small>
+    }
+
+    @if (
+      enrollForm.get('studentEmail')?.touched &&
+      enrollForm.get('studentEmail')?.hasError('email')
+    ) {
+      <small>Enter a valid email address.</small>
+    }
+
+    @if (
+      enrollForm.get('studentEmail')?.pending
+    ) {
+      <small>Checking email...</small>
+    }
+
+    @if (
+      enrollForm.get('studentEmail')?.touched &&
+      enrollForm.get('studentEmail')?.hasError('emailTaken')
+    ) {
+      <small>This email is already registered.</small>
+    }
+  </div>
+
+  <div>
+    <label for="courseName">Course Name</label>
+
+    <input
+      id="courseName"
+      type="text"
+      formControlName="courseName"
+      placeholder="Enter course name"
+    >
+
+    @if (
+      enrollForm.get('courseName')?.touched &&
+      enrollForm.get('courseName')?.hasError('required')
+    ) {
+      <small>Course name is required.</small>
+    }
+  </div>
+
+  <div>
+    <label for="courseId">Course Code</label>
+
+    <input
+      id="courseId"
+      type="text"
+      formControlName="courseId"
+      placeholder="Enter course code"
+    >
+
+    @if (
+      enrollForm.get('courseId')?.touched &&
+      enrollForm.get('courseId')?.hasError('required')
+    ) {
+      <small>Course code is required.</small>
+    }
+
+    @if (
+      enrollForm.get('courseId')?.touched &&
+      enrollForm.get('courseId')?.hasError('noCourseCode')
+    ) {
+      <small>Course code cannot start with XX.</small>
+    }
+  </div>
+
+  <div>
+    <label for="credits">Credits</label>
+
+    <input
+      id="credits"
+      type="number"
+      formControlName="credits"
+      placeholder="Enter credits"
+    >
+
+    @if (
+      enrollForm.get('credits')?.touched &&
+      enrollForm.get('credits')?.hasError('required')
+    ) {
+      <small>Credits are required.</small>
+    }
+
+    @if (
+      enrollForm.get('credits')?.touched &&
+      enrollForm.get('credits')?.hasError('min')
+    ) {
+      <small>Credits must be at least 1.</small>
+    }
+  </div>
+
+  <div>
+    <label for="preferredSemester">
+      Preferred Semester
+    </label>
+
+    <select
+      id="preferredSemester"
+      formControlName="preferredSemester"
+    >
+      <option value="Odd">Odd</option>
+      <option value="Even">Even</option>
+    </select>
+  </div>
+
+  <div>
+    <label>
+      <input
+        type="checkbox"
+        formControlName="agreeToTerms"
+      >
+      I agree to the terms
+    </label>
+
+    @if (
+      enrollForm.get('agreeToTerms')?.touched &&
+      enrollForm.get('agreeToTerms')?.hasError('required')
+    ) {
+      <small>You must agree to the terms.</small>
+    }
+  </div>
+
+  <div formArrayName="additionalCourses">
+
+    <h3>Additional Courses</h3>
+
+    @for (
+      control of additionalCourses.controls;
+      track $index
+    ) {
+      <div>
+        <input
+          type="text"
+          [formControlName]="$index"
+          placeholder="Enter additional course"
+        >
+
+        <button
+          type="button"
+          (click)="removeCourse($index)"
+        >
+          Remove
+        </button>
+      </div>
+    }
+
+  </div>
+
+  <button
+    type="button"
+    (click)="addCourse()"
+  >
+    Add Another Course
+  </button>
+
+  <button
+    type="submit"
+    [disabled]="isSubmitting"
+  >
+    {{ isSubmitting ? 'Submitting...' : 'Submit' }}
+  </button>
+
+  <button
+    type="button"
+    (click)="resetForm()"
+  >
+    Reset
+  </button>
+
+</form>
+
+@if (successMessage) {
+  <p>{{ successMessage }}</p>
+}
+
+@if (errorMessage) {
+  <p>{{ errorMessage }}</p>
+}
