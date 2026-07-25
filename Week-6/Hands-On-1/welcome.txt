@@ -1,2 +1,0 @@
-Welcome to Git hands-on lab.
-This is my first Git repository.
